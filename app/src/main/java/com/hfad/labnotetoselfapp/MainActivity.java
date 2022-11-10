@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         System.out.println("Setting up adapter");
         //adapter
-        NoteAdapter adapter = new NoteAdapter();
+        NoteAdapter adapter = new NoteAdapter(getSupportFragmentManager());
         rv.setAdapter(adapter);
 
         //Manager connects the above two

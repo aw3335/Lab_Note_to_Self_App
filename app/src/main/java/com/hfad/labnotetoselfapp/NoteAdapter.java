@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
@@ -17,9 +18,11 @@ import java.util.ArrayList;
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder>{
 
     private ArrayList<Note> noteList;
+    private FragmentManager fragmentManager;
 
-    public NoteAdapter()
+    public NoteAdapter(FragmentManager fm)
     {
+        fragmentManager = fm;
         noteList = Databse.getNotes();
         System.out.println("Done making list");
     }
@@ -55,7 +58,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
 
 
-    class NoteViewHolder extends RecyclerView.ViewHolder
+    class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
 
         private TextView tvTitle;
@@ -69,9 +72,9 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         public NoteViewHolder(@NonNull View itemView)
         {
             super(itemView);
-           tvTitle = itemView.findViewById(R.id.txt_title);
-           tvStatus = itemView.findViewById(R.id.txt_status);
-           tvDesc = itemView.findViewById(R.id.txt_text);
+            tvTitle = itemView.findViewById(R.id.txt_title);
+            tvStatus = itemView.findViewById(R.id.txt_status);
+            tvDesc = itemView.findViewById(R.id.txt_text);
             imvDelete = itemView.findViewById(R.id.img_delete);
 
             imvDelete.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +85,9 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                     notifyItemRangeChanged(currentPositionInList, noteList.size());
                 }
             });
+
+            itemView.setClickable(true);
+            itemView.setOnClickListener(this);
         }
 
         public void setData(Note vd, int position)
@@ -94,5 +100,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
         }
 
+        @Override
+        public void onClick(View v) {
+            DialogShowNote dialog = new DialogShowNote(currentDest);
+            dialog.show(fragmentManager, "");
+        }
     }
 }
