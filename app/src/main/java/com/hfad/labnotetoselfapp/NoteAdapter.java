@@ -1,15 +1,20 @@
 package com.hfad.labnotetoselfapp;
 
+import android.animation.Animator;
+import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.w3c.dom.Text;
 
@@ -51,7 +56,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         Note vd = noteList.get(position);
         holder.setData(vd, position);
 
-
         System.out.println("Done Populating a Row: " + position + "" + vd.getTitle());
 
     }
@@ -66,6 +70,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         private TextView tvDesc;
         private ImageView imvDelete;
 
+
         private int currentPositionInList = -1;
         private Note currentDest = null;
 
@@ -76,6 +81,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             tvStatus = itemView.findViewById(R.id.txt_status);
             tvDesc = itemView.findViewById(R.id.txt_text);
             imvDelete = itemView.findViewById(R.id.img_delete);
+
 
             imvDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -98,6 +104,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             currentPositionInList = position;
             currentDest = vd;
 
+        }
+
+        public Note returnDest()
+        {
+            return currentDest;
         }
 
         @Override

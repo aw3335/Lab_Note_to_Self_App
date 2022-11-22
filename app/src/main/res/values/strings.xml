@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Lab Note to Self App</string>
     <string name = "done">Done</string>
+
+    <string-array name="Attributes">
+        <item>Idea</item>
+        <item>Important</item>
+        <item>To-Do</item>
+    </string-array>
 </resources>

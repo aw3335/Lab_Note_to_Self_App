@@ -27,10 +27,10 @@ public class Databse {
         allNotes.add(new Note("Database Project", "Important", "Due Monday so I should do it tonight or tomorrow so we can be ahead"));
         allNotes.add(new Note("Pay Insurance", "TO-DO", "Money due in less then month. Should make sure I have enough money for payment."));
         allNotes.add(new Note("Work", "Important", "Starts at 7 and goes to 10, should get ready soon"));
+    }
 
-
-
-
-
+    public static void addNote(Note n)
+    {
+        allNotes.add(n);
     }
 }

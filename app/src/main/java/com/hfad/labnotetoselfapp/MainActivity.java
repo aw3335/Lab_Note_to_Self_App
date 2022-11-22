@@ -5,20 +5,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
+    private FloatingActionButton fabAdd;
+    private Note currentDest = Databse.getNotes().get(0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        System.out.println("Before setting up");
-        setUpRecyclerView();
-    }
-
-    private void setUpRecyclerView()
-    {
         RecyclerView rv = findViewById(R.id.recyclerView);
 
         System.out.println("Setting up adapter");
@@ -30,7 +30,21 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         rv.setLayoutManager(layoutManager);
+
+
+
+        fabAdd = findViewById(R.id.fab);
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               NewNote dialog = new NewNote(adapter);
+               dialog.show(getSupportFragmentManager(), "");
+            }
+        });
+
+        System.out.println("Before setting up");
     }
+
 
 
 }
